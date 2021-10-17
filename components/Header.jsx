@@ -45,7 +45,14 @@ const Header = () => {
             <div className="flex items-center justify-end space-x-4">
                <HomeIcon className="navBtn" />
                <MenuIcon className="h-6 md:hidden cursor-pointer" />
-               <PaperAirplaneIcon className="navBtn" />
+
+               <div className="relative navBtn ">
+                  <PaperAirplaneIcon className="navBtn rotate-45" />
+                  <div className="absolute -top-2 -right-2 text-sm bg-red-500 rounded-full flex items-center justify-center h-6 w-6 animate-pulse text-white">
+                     3
+                  </div>
+               </div>
+
                <PlusCircleIcon className="navBtn" />
                <UserGroupIcon className="navBtn" />
                <HeartIcon className="navBtn" />
@@ -53,7 +60,7 @@ const Header = () => {
                <img
                   src="/user-avatar.jpeg"
                   alt="User Avatar"
-                  className="h-10 rounded-full cursor-pointer"
+                  className="h-8 rounded-full cursor-pointer"
                />
             </div>
          </div>
