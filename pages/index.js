@@ -7,12 +7,11 @@ export default function Home() {
       <div className="bg-gray-50 h-screen overflow-y-scroll scrollbar-hide ">
          <Head>
             <title>Instagram</title>
-            <link rel="icon" href="/favicon.ico" />
+            <link rel="icon" href="/favicon.png" />
          </Head>
 
          <Header />
 
-         {/* Feed */}
          <Feed />
 
          {/*Modal */}
