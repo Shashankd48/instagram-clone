@@ -12,8 +12,8 @@ const Feed = () => {
                <Posts />
             </section>
 
-            <section className="hidden md:inline-grid md:col-span-1">
-               <div className="fixed ">
+            <section className="hidden md:inline-grid md:col-span-1 pl-4">
+               <div className="fixed w-full max-w-[280px]">
                   <MiniProfile />
                   <Suggestions />
                </div>
