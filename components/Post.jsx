@@ -48,8 +48,14 @@ const Post = ({ id, username, img, userImg, caption }) => {
          {/*input box*/}
          <form className="flex items-center p-4">
             <EmojiHappyIcon className="post-btn" />
-            <input type="text" className="" />
-            <button>Post</button>
+            <input
+               type="text"
+               className="border-none flex-1 focus:ring-0 outline-none"
+               placeholder="Add a comment..."
+            />
+            <button className={`font-medium text-blue-400`} disabled={true}>
+               Post
+            </button>
          </form>
       </div>
    );

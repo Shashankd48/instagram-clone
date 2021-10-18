@@ -13,7 +13,7 @@ const Header = () => {
    return (
       <header className="shadow border-b bg-white sticky top-0 z-50">
          <div className="flex justify-between bg-white max-w-4xl mx-5 lg:mx-auto">
-            <div className="relative hidden lg:inline-grid w-24  cursor-pointer">
+            <div className="relative hidden lg:inline-grid w-24 cursor-pointer flex-shrink-0">
                <Image
                   src="/instagram_logo.svg"
                   layout="fill"
