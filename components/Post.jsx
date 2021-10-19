@@ -13,7 +13,7 @@ const Post = ({ id, username, img, userImg, caption }) => {
       <div className="bg-white my-7 border rounded-sm">
          {/*Header */}
 
-         <div className="flex items-center p-5">
+         <div className="flex items-center p-3">
             <img
                src={userImg}
                alt="user image"

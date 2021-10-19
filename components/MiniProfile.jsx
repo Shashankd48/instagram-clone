@@ -15,14 +15,16 @@ const MiniProfile = () => {
                   />
 
                   <div className="ml-3">
-                     <h2 className="font-bold">{session.user.username}</h2>
+                     <h2 className="font-medium text-sm">
+                        {session.user.username}
+                     </h2>
                      <h3 className="text-sm text-gray-600">
                         {session.user.name}
                      </h3>
                   </div>
                </div>
                <button
-                  className="text-blue-400 text-sm font-medium"
+                  className="text-blue-500 text-xs font-medium"
                   onClick={signOut}
                >
                   Log out
