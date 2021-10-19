@@ -1,3 +1,5 @@
+import { signOut } from "next-auth/react";
+
 const MiniProfile = () => {
    return (
       <div className="flex items-center justify-between mt-14">
@@ -14,7 +16,12 @@ const MiniProfile = () => {
             </div>
          </div>
 
-         <button className="text-blue-400 text-sm font-medium">Log out</button>
+         <button
+            className="text-blue-400 text-sm font-medium"
+            onClick={signOut}
+         >
+            Log out
+         </button>
       </div>
    );
 };

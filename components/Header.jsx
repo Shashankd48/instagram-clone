@@ -8,8 +8,15 @@ import {
    PaperAirplaneIcon,
 } from "@heroicons/react/outline";
 import { HomeIcon } from "@heroicons/react/solid";
+import { signIn, useSession } from "next-auth/react";
+import { Fragment } from "react";
 
 const Header = () => {
+   const { data: session, status } = useSession();
+
+   console.log(session);
+   console.log(status);
+
    return (
       <header className="shadow border-b bg-white sticky top-0 z-50">
          <div className="flex justify-between bg-white max-w-4xl mx-5 lg:mx-auto">
@@ -46,22 +53,33 @@ const Header = () => {
                <HomeIcon className="navBtn" />
                <MenuIcon className="h-6 md:hidden cursor-pointer" />
 
-               <div className="relative navBtn ">
-                  <PaperAirplaneIcon className="navBtn rotate-45" />
-                  <div className="absolute -top-2 -right-2 text-sm bg-red-500 rounded-full flex items-center justify-center h-6 w-6 animate-pulse text-white">
-                     3
-                  </div>
-               </div>
+               {session ? (
+                  <Fragment>
+                     <div className="relative navBtn ">
+                        <PaperAirplaneIcon className="navBtn rotate-45" />
+                        <div className="absolute -top-2 -right-2 text-sm bg-red-500 rounded-full flex items-center justify-center h-6 w-6 animate-pulse text-white">
+                           3
+                        </div>
+                     </div>
 
-               <PlusCircleIcon className="navBtn" />
-               <UserGroupIcon className="navBtn" />
-               <HeartIcon className="navBtn" />
+                     <PlusCircleIcon className="navBtn" />
+                     <UserGroupIcon className="navBtn" />
+                     <HeartIcon className="navBtn" />
 
-               <img
-                  src="/user-avatar.jpeg"
-                  alt="User Avatar"
-                  className="h-8 rounded-full cursor-pointer"
-               />
+                     <img
+                        src={session?.user?.image}
+                        alt="User Avatar"
+                        className="h-8 rounded-full cursor-pointer"
+                     />
+                  </Fragment>
+               ) : (
+                  <button
+                     onClick={signIn}
+                     className="text-sm text-blue-500 font-medium"
+                  >
+                     Log In
+                  </button>
+               )}
             </div>
          </div>
       </header>
