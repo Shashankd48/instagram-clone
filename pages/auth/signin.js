@@ -2,10 +2,15 @@ import { getProviders, signIn as signIntoProvider } from "next-auth/react";
 import { Fragment } from "react";
 import Header from "../../components/Header";
 import Image from "next/image";
+import Head from "next/head";
 
 const SignIn = ({ providers }) => {
    return (
       <Fragment>
+         <Head>
+            <title>Login | Instagram</title>
+            <link rel="icon" href="/favicon.png" />
+         </Head>
          <Header />
 
          <div className="max-w-4xl mx-auto">
