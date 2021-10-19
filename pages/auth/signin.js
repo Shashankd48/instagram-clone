@@ -1,4 +1,4 @@
-import { getProviders, signIn } from "next-auth/react";
+import { getProviders, signIn as signIntoProvider } from "next-auth/react";
 import { Fragment } from "react";
 
 const SignIn = ({ providers }) => {
@@ -6,7 +6,7 @@ const SignIn = ({ providers }) => {
       <Fragment>
          {Object.values(providers).map((provider) => (
             <div key={provider.name}>
-               <button onClick={() => signIn(provider.id)}>
+               <button onClick={() => signIntoProvider(provider.id)}>
                   Sign in with {provider.name}
                </button>
             </div>
@@ -16,7 +16,7 @@ const SignIn = ({ providers }) => {
 };
 
 export async function getServerSideProps() {
-   const providers = getProviders();
+   const providers = await getProviders();
    return {
       props: {
          providers,
