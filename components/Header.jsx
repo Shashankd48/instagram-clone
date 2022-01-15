@@ -16,9 +16,6 @@ const Header = () => {
    const { data: session, status } = useSession();
    const router = useRouter();
 
-   console.log(session);
-   console.log(status);
-
    const LogoSection = () => {
       return (
          <Fragment>

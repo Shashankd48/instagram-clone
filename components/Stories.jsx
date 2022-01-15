@@ -1,19 +1,31 @@
-import faker from "faker";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { getRandomUsers } from "../actions/UtilesAction";
 import Story from "./Story";
 
 const Stories = () => {
    const [suggestions, setSuggestions] = useState([]);
    const { data: session } = useSession();
 
-   useEffect(() => {
-      const usersList = [...Array(20)].map((_, index) => ({
-         ...faker.helpers.contextualCard(),
-         id: index,
-      }));
+   const generateFakeUsers = async () => {
+      const users = await getRandomUsers(20);
 
-      setSuggestions(usersList);
+      if (users && users?.results?.length > 0) {
+         const tempUsers = [];
+         users.results.forEach((user) => {
+            tempUsers.push({
+               username: user.login.username,
+               id: user.login.uuid,
+               avatar: user.picture.medium,
+            });
+         });
+         setSuggestions(tempUsers);
+         console.log(users);
+      }
+   };
+
+   useEffect(() => {
+      generateFakeUsers();
    }, []);
 
    return (

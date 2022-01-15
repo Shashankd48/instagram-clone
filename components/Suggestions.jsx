@@ -1,16 +1,29 @@
 import { useEffect, useState } from "react";
-import faker from "faker";
+import { getRandomUsers } from "../actions/UtilesAction";
 
 const Suggestions = () => {
    const [suggestions, setSuggestions] = useState([]);
 
-   useEffect(() => {
-      const usersList = [...Array(5)].map((_, index) => ({
-         ...faker.helpers.contextualCard(),
-         id: `${index}-sug`,
-      }));
+   const generateFakeUsers = async () => {
+      const users = await getRandomUsers(5);
 
-      setSuggestions(usersList);
+      if (users && users?.results?.length > 0) {
+         const tempUsers = [];
+         users.results.forEach((user) => {
+            tempUsers.push({
+               username: user.login.username,
+               id: user.login.uuid,
+               avatar: user.picture.medium,
+               location: `${user.location.city}, ${user.location.country}`,
+            });
+         });
+         setSuggestions(tempUsers);
+         console.log(users);
+      }
+   };
+
+   useEffect(() => {
+      generateFakeUsers();
    }, []);
 
    return (
@@ -33,7 +46,7 @@ const Suggestions = () => {
 
                <div className="flex-1 ml-4">
                   <h2 className="font-semibold text-sm">{profile.username}</h2>
-                  <h3 className="text-xs">Works at {profile.company.name}</h3>
+                  <h3 className="text-xs">Lives in {profile.location}</h3>
                </div>
 
                <button className="text-xs text-blue-500 font-medium">
