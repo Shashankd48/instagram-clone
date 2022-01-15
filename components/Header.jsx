@@ -11,10 +11,13 @@ import { HomeIcon } from "@heroicons/react/solid";
 import { signIn, useSession } from "next-auth/react";
 import { Fragment } from "react";
 import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import { modalState } from "../atom/modalAtom";
 
 const Header = () => {
-   const { data: session, status } = useSession();
+   const { data: session } = useSession();
    const router = useRouter();
+   const [open, setOpen] = useRecoilState(modalState);
 
    const LogoSection = () => {
       return (
@@ -69,12 +72,15 @@ const Header = () => {
                <Fragment>
                   <div className="relative navBtn ">
                      <PaperAirplaneIcon className="navBtn rotate-45" />
-                     <div className="absolute -top-2 -right-2 text-sm bg-red-500 rounded-full flex items-center justify-center h-6 w-6 animate-pulse text-white">
+                     <div className="absolute -top-2 -right-2 text-sm bg-red-500 rounded-full flex items-center justify-center h-5 w-5 text-white">
                         3
                      </div>
                   </div>
 
-                  <PlusCircleIcon className="navBtn" />
+                  <PlusCircleIcon
+                     className="navBtn"
+                     onClick={() => setOpen(true)}
+                  />
                   <UserGroupIcon className="navBtn" />
                   <HeartIcon className="navBtn" />
 
