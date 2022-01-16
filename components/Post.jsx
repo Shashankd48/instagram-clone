@@ -18,6 +18,7 @@ import {
    serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../firebase";
+import Comments from "./Comments";
 
 const Post = ({ id, username, img, userImg, caption, location }) => {
    const { data: session } = useSession();
@@ -91,27 +92,7 @@ const Post = ({ id, username, img, userImg, caption, location }) => {
          </p>
 
          {/*Comments*/}
-         {comments.length > 0 && (
-            <div className="ml-8 h-20 overflow-y-scroll scrollbar-thumb-black scrollbar-thin">
-               {comments.map((comment) => (
-                  <div
-                     key={comment.id}
-                     className="flex items-center space-x-2 mb-3"
-                  >
-                     <img
-                        src={
-                           comment.data().userImage
-                              ? comment.data().userImage
-                              : "/user-avatar.jpeg"
-                        }
-                        alt="Avatar"
-                        className="h-7 rounded-full"
-                     />
-                     <p>{comment.data().comment}</p>
-                  </div>
-               ))}
-            </div>
-         )}
+         {comments.length > 0 && <Comments comments={comments} />}
 
          {/*input box*/}
          <form className="flex items-center p-4">
