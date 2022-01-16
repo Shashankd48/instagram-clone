@@ -7,8 +7,10 @@ import {
    EmojiHappyIcon,
    PaperAirplaneIcon,
 } from "@heroicons/react/outline";
+import { useSession } from "next-auth/react";
 
 const Post = ({ id, username, img, userImg, caption }) => {
+   const { data: session } = useSession();
    return (
       <div className="bg-white my-7 border rounded-sm">
          {/*Header */}
@@ -28,14 +30,16 @@ const Post = ({ id, username, img, userImg, caption }) => {
 
          {/*Buttons*/}
 
-         <div className="flex justify-between px-4 pt-4">
-            <div className="flex space-x-4">
-               <HeartIconOutlined className="post-btn" />
-               <ChatIcon className="post-btn" />
-               <PaperAirplaneIcon className="post-btn" />
+         {session && (
+            <div className="flex justify-between px-4 pt-4">
+               <div className="flex space-x-4">
+                  <HeartIconOutlined className="post-btn" />
+                  <ChatIcon className="post-btn" />
+                  <PaperAirplaneIcon className="post-btn" />
+               </div>
+               <BookmarkIcon className="post-btn" />
             </div>
-            <BookmarkIcon className="post-btn" />
-         </div>
+         )}
 
          {/* Caption */}
          <p className="p-5 truncate">
