@@ -8,9 +8,48 @@ import {
    PaperAirplaneIcon,
 } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import {
+   addDoc,
+   collection,
+   onSnapshot,
+   orderBy,
+   query,
+   serverTimestamp,
+} from "firebase/firestore";
+import { db } from "../firebase";
 
 const Post = ({ id, username, img, userImg, caption, location }) => {
    const { data: session } = useSession();
+   const [comments, setComments] = useState([]);
+   const [comment, setComment] = useState("");
+
+   useEffect(
+      () =>
+         onSnapshot(
+            query(
+               collection(db, "posts", id, "comments"),
+               orderBy("timestamp", "desc")
+            ),
+            (snapshot) => setComments(snapshot.docs)
+         ),
+      [db]
+   );
+
+   const addComment = async (e) => {
+      e.preventDefault();
+
+      const commentToSend = comment;
+      setComment("");
+
+      await addDoc(collection(db, "posts", id, "comments"), {
+         comment: commentToSend,
+         username: session.user.username,
+         userImage: session.user.image,
+         timestamp: serverTimestamp(),
+      });
+   };
+
    return (
       <div className="bg-white my-7 border rounded-sm">
          {/*Header */}
@@ -52,6 +91,27 @@ const Post = ({ id, username, img, userImg, caption, location }) => {
          </p>
 
          {/*Comments*/}
+         {comments.length > 0 && (
+            <div className="ml-8 h-20 overflow-y-scroll scrollbar-thumb-black scrollbar-thin">
+               {comments.map((comment) => (
+                  <div
+                     key={comment.id}
+                     className="flex items-center space-x-2 mb-3"
+                  >
+                     <img
+                        src={
+                           comment.data().userImage
+                              ? comment.data().userImage
+                              : "/user-avatar.jpeg"
+                        }
+                        alt="Avatar"
+                        className="h-7 rounded-full"
+                     />
+                     <p>{comment.data().comment}</p>
+                  </div>
+               ))}
+            </div>
+         )}
 
          {/*input box*/}
          <form className="flex items-center p-4">
@@ -60,8 +120,15 @@ const Post = ({ id, username, img, userImg, caption, location }) => {
                type="text"
                className="border-none flex-1 focus:ring-0 outline-none"
                placeholder="Add a comment..."
+               value={comment}
+               onChange={(e) => setComment(e.target.value)}
             />
-            <button className={`font-medium text-blue-400`} disabled={true}>
+            <button
+               className={`font-medium text-blue-400`}
+               disabled={!comment.trim()}
+               type="submit"
+               onClick={addComment}
+            >
                Post
             </button>
          </form>
