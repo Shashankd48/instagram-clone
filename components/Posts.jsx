@@ -1,5 +1,6 @@
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { getPosts } from "../actions/PostAction";
 import { db } from "../firebase";
 import Post from "./Post";
 
@@ -38,7 +39,7 @@ const posts = [
    },
 ];
 
-const Posts = () => {
+const Posts = (ssrPosts) => {
    const [posts, setPosts] = useState([]);
 
    useEffect(
@@ -46,7 +47,19 @@ const Posts = () => {
          onSnapshot(
             query(collection(db, "posts"), orderBy("timestamp", "desc")),
             (snapshot) => {
-               setPosts(snapshot.docs);
+               const temp = [];
+               snapshot.docs.forEach((doc) => {
+                  temp.push({
+                     id: doc.id,
+                     username: doc.data().username,
+                     image: doc.data().image,
+                     caption: doc.data().caption,
+                     location: doc.data().location,
+                     profileImg: doc.data().profileImg,
+                  });
+               });
+
+               setPosts(temp);
             }
          ),
       [db]
@@ -58,11 +71,11 @@ const Posts = () => {
             <Post
                key={post.id}
                id={post.id}
-               username={post.data().username}
-               img={post.data().image}
-               userImg={post.data().profileImg}
-               caption={post.data().caption}
-               location={post.data().location}
+               username={post.username}
+               img={post.image}
+               userImg={post.profileImg}
+               caption={post.caption}
+               location={post.location}
             />
          ))}
       </div>

@@ -19,6 +19,8 @@ const Header = () => {
    const router = useRouter();
    const [open, setOpen] = useRecoilState(modalState);
 
+   console.log(session);
+
    const LogoSection = () => {
       return (
          <Fragment>
@@ -88,6 +90,7 @@ const Header = () => {
                      src={session?.user?.image}
                      alt="User Avatar"
                      className="h-8 rounded-full cursor-pointer"
+                     onClick={() => router.push(`/${session.user.username}`)}
                   />
                </Fragment>
             ) : (
