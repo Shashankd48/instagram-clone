@@ -62,6 +62,7 @@ const Posts = () => {
                img={post.data().image}
                userImg={post.data().profileImg}
                caption={post.data().caption}
+               location={post.data().location}
             />
          ))}
       </div>

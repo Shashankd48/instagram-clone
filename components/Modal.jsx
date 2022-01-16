@@ -19,6 +19,7 @@ const Modal = () => {
    const [open, setOpen] = useRecoilState(modalState);
    const filePickerRef = useRef(null);
    const captionRef = useRef("");
+   const locationRef = useRef("");
    const [selectedFile, setSelectedFile] = useState(null);
    const [loading, setLoading] = useState(false);
 
@@ -44,6 +45,7 @@ const Modal = () => {
          caption: captionRef.current.value,
          profileImg: session.user.image,
          timestamp: serverTimestamp(),
+         location: locationRef.current.value,
       });
 
       console.log(" new odc", docRef.id);
@@ -143,8 +145,16 @@ const Modal = () => {
                               <input
                                  type="text"
                                  className="border-none focus:ring-0 w-full text-center"
-                                 placeholder="Please enter a caption"
+                                 placeholder="Write a caption..."
                                  ref={captionRef}
+                              />
+                           </div>
+                           <div className="mt-2">
+                              <input
+                                 type="text"
+                                 className="border-none focus:ring-0 w-full text-center"
+                                 placeholder="Add location"
+                                 ref={locationRef}
                               />
                            </div>
                         </div>

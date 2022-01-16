@@ -9,7 +9,7 @@ import {
 } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
 
-const Post = ({ id, username, img, userImg, caption }) => {
+const Post = ({ id, username, img, userImg, caption, location }) => {
    const { data: session } = useSession();
    return (
       <div className="bg-white my-7 border rounded-sm">
@@ -21,7 +21,11 @@ const Post = ({ id, username, img, userImg, caption }) => {
                alt="user image"
                className="rounded-full h-12 w-12 object-contain border p-1 mr-3"
             />
-            <p className="flex-1 font-medium">{username}</p>
+            <div className="flex-1">
+               <p className="font-medium">{username}</p>
+               <p className="text-sm">{location}</p>
+            </div>
+
             <DotsHorizontalIcon className="h-5" />
          </div>
          {/*Img */}
