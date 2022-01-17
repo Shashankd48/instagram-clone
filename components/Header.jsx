@@ -41,8 +41,8 @@ const Header = () => {
 
    const SearchSection = () => {
       return (
-         <div className="max-w-xs xs:hidden ">
-            <div className="relative p-3 rounded-md ">
+         <div className="max-w-xs hidden sm:block">
+            <div className="relative rounded-md ">
                <div className="absolute inset-y-0 pl-3 flex items-center pointer-events-none ">
                   <SearchIcon className="h-5 w-5 text-gray-500 " />
                </div>
@@ -97,7 +97,7 @@ const Header = () => {
    };
 
    return (
-      <header className="shadow border-b bg-white sticky top-0 z-50">
+      <header className="shadow border-b bg-white sticky top-0 z-50 py-2">
          <div className="flex justify-between bg-white max-w-4xl mx-5 lg:mx-auto">
             <LogoSection />
 
