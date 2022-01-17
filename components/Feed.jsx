@@ -8,7 +8,7 @@ import { Fragment } from "react";
 const Feed = () => {
    const { data: session } = useSession();
    return (
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto ">
          <main
             className={`grid grid-cols-2 md:grid-cols-2 md:max-w-lg lg:grid-cols-3 lg:max-w-4xl xl:max-w-4xl mx-auto sm:max-w-xl ${
                !session && "!grid-cols-2 !max-w-xl"

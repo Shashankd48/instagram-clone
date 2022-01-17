@@ -1,25 +1,19 @@
 import Image from "next/image";
-import {
-   SearchIcon,
-   PlusCircleIcon,
-   UserGroupIcon,
-   HeartIcon,
-   MenuIcon,
-   PaperAirplaneIcon,
-} from "@heroicons/react/outline";
-import { HomeIcon } from "@heroicons/react/solid";
+import { SearchIcon, MenuIcon } from "@heroicons/react/outline";
 import { signIn, useSession } from "next-auth/react";
 import { Fragment } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { modalState } from "../atom/modalAtom";
+import HomeIcon from "./Icons/HomeIcon";
+import AddIcon from "./Icons/AddIcon";
+import ExploreIcon from "./Icons/ExploreIcon";
+import HeartIcon from "./Icons/HeartIcon";
 
 const Header = () => {
    const { data: session } = useSession();
    const router = useRouter();
-   const [open, setOpen] = useRecoilState(modalState);
-
-   console.log(session);
+   const [, setOpen] = useRecoilState(modalState);
 
    const LogoSection = () => {
       return (
@@ -47,7 +41,7 @@ const Header = () => {
 
    const SearchSection = () => {
       return (
-         <div className="max-w-xs">
+         <div className="max-w-xs xs:hidden ">
             <div className="relative p-3 rounded-md ">
                <div className="absolute inset-y-0 pl-3 flex items-center pointer-events-none ">
                   <SearchIcon className="h-5 w-5 text-gray-500 " />
@@ -66,25 +60,22 @@ const Header = () => {
 
    const ButtonsSection = () => {
       return (
-         <div className="flex items-center justify-end space-x-4">
-            <HomeIcon className="navBtn" onClick={() => router.push("/")} />
-            <MenuIcon className="h-6 md:hidden cursor-pointer" />
+         <div className="flex items-center justify-end space-x-6">
+            <HomeIcon onClick={() => router.push("/")} className="nav-btn" />
 
             {session ? (
                <Fragment>
-                  <div className="relative navBtn ">
-                     <PaperAirplaneIcon className="navBtn rotate-45" />
-                     <div className="absolute -top-2 -right-2 text-sm bg-red-500 rounded-full flex items-center justify-center h-5 w-5 text-white">
-                        3
-                     </div>
-                  </div>
-
-                  <PlusCircleIcon
-                     className="navBtn"
+                  <AddIcon
                      onClick={() => setOpen(true)}
+                     className="nav-btn nav-block"
                   />
-                  <UserGroupIcon className="navBtn" />
-                  <HeartIcon className="navBtn" />
+
+                  <ExploreIcon
+                     onClick={() => router.push("/explore")}
+                     className="nav-btn"
+                  />
+
+                  <HeartIcon className="nav-btn" />
 
                   <img
                      src={session?.user?.image}

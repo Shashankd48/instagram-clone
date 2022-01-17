@@ -1,6 +1,6 @@
 import { HeartIcon as HeartIconFilled } from "@heroicons/react/solid";
 import {
-   HeartIcon as HeartIconOutlined,
+   // HeartIcon as HeartIconOutlined,
    BookmarkIcon,
    ChatIcon,
    DotsHorizontalIcon,
@@ -22,6 +22,10 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import Comments from "./Comments";
+import HeartOutlinedIcon from "./Icons/HeartOutlinedIcon";
+import RedHeartIcon from "./Icons/RedHeartIcon";
+import CommentIcon from "./Icons/CommentIcon";
+import BookmarkOutlinedIcon from "./Icons/BookmarkOutlinedIcon";
 
 const Post = ({ id, username, img, userImg, caption, location }) => {
    const { data: session } = useSession();
@@ -107,22 +111,19 @@ const Post = ({ id, username, img, userImg, caption, location }) => {
          {session && (
             <div className="flex justify-between px-4 pt-4">
                <div className="flex space-x-4">
-                  {hasLiked ? (
-                     <HeartIconFilled
-                        className="post-btn text-red-500"
-                        onClick={likePost}
-                     />
-                  ) : (
-                     <HeartIconOutlined
-                        className="post-btn"
-                        onClick={likePost}
-                     />
-                  )}
+                  <div onClick={likePost} className="post-btn">
+                     {hasLiked ? <RedHeartIcon /> : <HeartOutlinedIcon />}
+                  </div>
 
-                  <ChatIcon className="post-btn" />
+                  <div className="post-btn">
+                     <CommentIcon />
+                  </div>
+
                   <PaperAirplaneIcon className="post-btn" />
                </div>
-               <BookmarkIcon className="post-btn" />
+               <div className="post-btn">
+                  <BookmarkOutlinedIcon />
+               </div>
             </div>
          )}
 

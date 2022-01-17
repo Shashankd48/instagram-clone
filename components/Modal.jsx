@@ -48,8 +48,6 @@ const Modal = () => {
          location: locationRef.current.value,
       });
 
-      console.log(" new odc", docRef.id);
-
       const imageRef = ref(storage, `posts/${docRef.id}/image`);
 
       await uploadString(imageRef, selectedFile, "data_url").then(

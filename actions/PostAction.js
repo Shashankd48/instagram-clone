@@ -12,8 +12,12 @@ import {
 } from "firebase/firestore";
 import moment from "moment";
 
-export async function getPosts(postCount) {
-   const q = query(collection(db, "posts"), limit(postCount));
+export async function getPosts(postCount, order) {
+   const q = query(
+      collection(db, "posts"),
+      limit(postCount),
+      orderBy("timestamp", "desc")
+   );
    const querySnapshot = await getDocs(q);
    let posts = [];
    querySnapshot.forEach((doc) => {

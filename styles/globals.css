@@ -12,8 +12,13 @@
    .navBtn {
       @apply hidden h-7 md:inline-flex cursor-pointer hover:scale-105 transition-all duration-150 ease-out;
    }
-
    .post-btn {
       @apply h-7 hover:scale-110 cursor-pointer transition-all duration-150 ease-out;
    }
 }
+
+/* @media screen and (max-width: 768px) {
+   nav-btn {
+      display: none;
+   }
+} */

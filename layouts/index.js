@@ -4,14 +4,11 @@ import Header from "../components/Header";
 
 const Layouts = ({ children }) => {
    return (
-      <Fragment>
-         <Head>
-            <title>Instagram</title>
-            <link rel="icon" href="/favicon.png" />
-         </Head>
+      <div className="">
          <Header />
+
          {children}
-      </Fragment>
+      </div>
    );
 };
 
