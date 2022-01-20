@@ -10,7 +10,7 @@ const config = {
    secret: process.env.SECRET,
    nextAuthURL: process.env.NEXTAUTH_URL,
    googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
-   googleClientId: GOOGLE_CLIENT_ID,
+   googleClientId: process.env.GOOGLE_CLIENT_ID,
 };
 
 export default config;
