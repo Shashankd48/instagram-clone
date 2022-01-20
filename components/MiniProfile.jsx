@@ -9,11 +9,16 @@ const MiniProfile = () => {
          {session && (
             <Fragment>
                <div className="flex items-center">
-                  <img
-                     src={session.user.image}
-                     alt="user profile"
-                     className="rounded-full border p-[2px] w-14 h-14"
-                  />
+                  <div className="p-[2px] rounded-full border">
+                     <div className="w-12 h-12 relative">
+                        <Image
+                           src={session.user.image}
+                           alt="user profile"
+                           className="rounded-full"
+                           layout="fill"
+                        />
+                     </div>
+                  </div>
 
                   <div className="ml-3">
                      <h2 className="font-medium text-sm">
