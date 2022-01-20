@@ -1,5 +1,14 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import {
+   doc,
+   getDoc,
+   addDoc,
+   collection,
+   serverTimestamp,
+} from "firebase/firestore";
+import { db } from "../../../firebase";
+import { getUserByUsername } from "../../../actions/UserAction";
 
 export default NextAuth({
    // Configure one or more authentication providers
@@ -16,13 +25,23 @@ export default NextAuth({
    },
    callbacks: {
       async session({ session, token, user }) {
-         console.log("log: ", session);
-         session.user.username = session.user.name
-            .split(" ")
-            .join("-")
-            .toLocaleLowerCase();
+         const username = session.user.email.split("@")[0];
+         const foundUser = await getUserByUsername(username);
 
+         if (!foundUser) {
+            // Create a user in 'users' collection
+            await addDoc(collection(db, "users"), {
+               username: username,
+               email: session.user.email,
+               name: session.user.name,
+               image: session.user.image,
+               timestamp: serverTimestamp(),
+            });
+         }
+
+         session.user.username = username;
          session.user.uid = token.sub;
+
          return session;
       },
    },
