@@ -4,6 +4,8 @@ module.exports = {
          "instrgam.xparticle.in",
          "localhost",
          "firebasestorage.googleapis.com",
+         "randomuser.me",
+         "lh3.googleusercontent.com",
       ],
    },
    env: {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getRandomUsers } from "../actions/UtilesAction";
+import Image from "next/image";
 
 const Suggestions = () => {
    const [suggestions, setSuggestions] = useState([]);
@@ -38,11 +39,15 @@ const Suggestions = () => {
                key={profile.id}
                className="flex items-center justify-between mt-3"
             >
-               <img
-                  src={profile.avatar}
-                  alt="user profile"
-                  className="w-10 h-10 rounded-full border p-[2px]"
-               />
+               <div className="w-10 h-10 relative">
+                  <Image
+                     src={profile.avatar}
+                     alt="user profile"
+                     className="rounded-full border p-[2px]"
+                     layout="fill"
+                     objectFit="contain"
+                  />
+               </div>
 
                <div className="flex-1 ml-4">
                   <h2 className="font-semibold text-sm">{profile.username}</h2>

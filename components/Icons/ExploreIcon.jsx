@@ -8,7 +8,7 @@ const ExploreIcon = ({ onClick, className = "cursor-pointer" }) => {
          {router.pathname === "/explore" ? (
             <svg
                aria-label="Find People"
-               class="_8-yf5 "
+               className="_8-yf5 "
                color="#262626"
                fill="#262626"
                height="24"
@@ -21,7 +21,7 @@ const ExploreIcon = ({ onClick, className = "cursor-pointer" }) => {
          ) : (
             <svg
                aria-label="Find People"
-               class="_8-yf5 "
+               className="_8-yf5 "
                color="#262626"
                fill="#262626"
                height="24"
@@ -33,12 +33,12 @@ const ExploreIcon = ({ onClick, className = "cursor-pointer" }) => {
                   fill="none"
                   points="13.941 13.953 7.581 16.424 10.06 10.056 16.42 7.585 13.941 13.953"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                ></polygon>
                <polygon
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   points="10.06 10.056 13.949 13.945 7.581 16.424 10.06 10.056"
                ></polygon>
                <circle
@@ -47,9 +47,9 @@ const ExploreIcon = ({ onClick, className = "cursor-pointer" }) => {
                   fill="none"
                   r="10.5"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                ></circle>
             </svg>
          )}

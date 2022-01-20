@@ -104,13 +104,13 @@ const Post = ({ id, username, img, userImg, caption, location }) => {
                maxHeight: "600px",
                width: "100%",
                position: "relative",
-               objectFit: "contain",
+               // objectFit: "contain",
             }}
          >
             <Image
                src={img}
                alt="Post"
-               // className="object-cover w-full"
+               className="object-cover w-full"
                layout="fill"
                objectFit="contain"
             />
