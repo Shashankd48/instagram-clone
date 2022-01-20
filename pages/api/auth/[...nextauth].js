@@ -16,6 +16,7 @@ export default NextAuth({
    },
    callbacks: {
       async session({ session, token, user }) {
+         console.log("log: ", session);
          session.user.username = session.user.name
             .split(" ")
             .join("-")

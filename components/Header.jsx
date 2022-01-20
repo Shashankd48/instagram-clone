@@ -9,6 +9,8 @@ import HomeIcon from "./Icons/HomeIcon";
 import AddIcon from "./Icons/AddIcon";
 import ExploreIcon from "./Icons/ExploreIcon";
 import HeartIcon from "./Icons/HeartIcon";
+import Popover from "./Popover";
+import ProfileButton from "./ProfileButton";
 
 const Header = () => {
    const { data: session } = useSession();
@@ -77,12 +79,7 @@ const Header = () => {
 
                   <HeartIcon className="nav-btn" />
 
-                  <img
-                     src={session?.user?.image}
-                     alt="User Avatar"
-                     className="h-8 rounded-full cursor-pointer"
-                     onClick={() => router.push(`/${session.user.username}`)}
-                  />
+                  <ProfileButton />
                </Fragment>
             ) : (
                <button

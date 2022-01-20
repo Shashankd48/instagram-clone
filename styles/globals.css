@@ -15,4 +15,7 @@
    .post-btn {
       @apply h-7 hover:scale-110 cursor-pointer transition-all duration-150 ease-out;
    }
+   .nav-btn {
+      cursor: pointer;
+   }
 }

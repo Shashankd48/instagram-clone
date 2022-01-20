@@ -1,14 +1,14 @@
-const BookmarkOutlinedIcon = () => {
+const BookmarkOutlinedIcon = ({ width = 24, height = 24 }) => {
    return (
       <svg
          aria-label="Save"
          class="_8-yf5 "
          color="#262626"
          fill="#262626"
-         height="24"
+         height={height}
          role="img"
          viewBox="0 0 24 24"
-         width="24"
+         width={width}
       >
          <polygon
             fill="none"
