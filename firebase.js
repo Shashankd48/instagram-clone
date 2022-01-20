@@ -18,16 +18,6 @@ const firebaseConfig = {
    measurementId: config.measurementId,
 };
 
-// const firebaseConfig = {
-//    apiKey: process.env.APIKEY,
-//    authDomain: process.env.AUTH_DOMAIN,
-//    projectId: "instagram-clone-98b68",
-//    storageBucket: "instagram-clone-98b68.appspot.com",
-//    messagingSenderId: "26831812486",
-//    appId: "1:26831812486:web:a12c299f06d09ae561de07",
-//    measurementId: "G-VESYJ294F4",
-// };
-
 // Initialize Firebase
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const db = getFirestore();
