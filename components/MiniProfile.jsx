@@ -1,5 +1,6 @@
 import { signOut, useSession } from "next-auth/react";
 import { Fragment } from "react";
+import Image from "next/image";
 
 const MiniProfile = () => {
    const { data: session } = useSession();

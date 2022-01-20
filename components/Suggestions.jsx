@@ -19,7 +19,6 @@ const Suggestions = () => {
             });
          });
          setSuggestions(tempUsers);
-         console.log(users);
       }
    };
 
@@ -39,14 +38,16 @@ const Suggestions = () => {
                key={profile.id}
                className="flex items-center justify-between mt-3"
             >
-               <div className="w-10 h-10 relative">
-                  <Image
-                     src={profile.avatar}
-                     alt="user profile"
-                     className="rounded-full border p-[2px]"
-                     layout="fill"
-                     objectFit="contain"
-                  />
+               <div className="p-[2px] rounded-full border">
+                  <div className="w-8 h-8 relative ">
+                     <Image
+                        src={profile.avatar}
+                        alt="user profile"
+                        className="rounded-full"
+                        layout="fill"
+                        objectFit="contain"
+                     />
+                  </div>
                </div>
 
                <div className="flex-1 ml-4">
