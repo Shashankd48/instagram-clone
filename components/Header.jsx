@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { SearchIcon, MenuIcon } from "@heroicons/react/outline";
+import { SearchIcon } from "@heroicons/react/outline";
 import { signIn, useSession } from "next-auth/react";
 import { Fragment } from "react";
 import { useRouter } from "next/router";

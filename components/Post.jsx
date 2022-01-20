@@ -1,12 +1,4 @@
-import { HeartIcon as HeartIconFilled } from "@heroicons/react/solid";
-import {
-   // HeartIcon as HeartIconOutlined,
-   BookmarkIcon,
-   ChatIcon,
-   DotsHorizontalIcon,
-   EmojiHappyIcon,
-   PaperAirplaneIcon,
-} from "@heroicons/react/outline";
+import { DotsHorizontalIcon, EmojiHappyIcon } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import {
@@ -26,6 +18,7 @@ import HeartOutlinedIcon from "./Icons/HeartOutlinedIcon";
 import RedHeartIcon from "./Icons/RedHeartIcon";
 import CommentIcon from "./Icons/CommentIcon";
 import BookmarkOutlinedIcon from "./Icons/BookmarkOutlinedIcon";
+import Image from "next/image";
 
 const Post = ({ id, username, img, userImg, caption, location }) => {
    const { data: session } = useSession();
@@ -104,7 +97,24 @@ const Post = ({ id, username, img, userImg, caption, location }) => {
          </div>
          {/*Img */}
 
-         <img src={img} alt="Post" className="object-cover w-full" />
+         <div
+            className="w-full"
+            style={{
+               minHeight: "500px",
+               maxHeight: "600px",
+               width: "100%",
+               position: "relative",
+               objectFit: "contain",
+            }}
+         >
+            <Image
+               src={img}
+               alt="Post"
+               // className="object-cover w-full"
+               layout="fill"
+               objectFit="contain"
+            />
+         </div>
 
          {/*Buttons*/}
 
@@ -119,7 +129,7 @@ const Post = ({ id, username, img, userImg, caption, location }) => {
                      <CommentIcon />
                   </div>
 
-                  <PaperAirplaneIcon className="post-btn" />
+                  {/*<PaperAirplaneIcon className="post-btn" /> */}
                </div>
                <div className="post-btn">
                   <BookmarkOutlinedIcon />
