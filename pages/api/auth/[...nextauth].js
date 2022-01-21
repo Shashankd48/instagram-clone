@@ -28,6 +28,8 @@ export default NextAuth({
          const username = session.user.email.split("@")[0];
          const foundUser = await getUserByUsername(username);
 
+         console.log("log: foundUser", foundUser);
+
          if (!foundUser) {
             // Create a user in 'users' collection
             await addDoc(collection(db, "users"), {

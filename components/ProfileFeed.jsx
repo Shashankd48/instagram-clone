@@ -44,6 +44,7 @@ const ProfileFeed = () => {
                      tab === item.value ? "text-gray-900" : ""
                   } active:opacity-60 flex items-center`}
                   onClick={() => setTab(item.value)}
+                  key={item.value}
                >
                   {getIcon(item.value, tab === item.value ? true : false)}{" "}
                   <span className="ml-2">{item.name}</span>
