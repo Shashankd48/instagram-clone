@@ -20,9 +20,8 @@ const Profile = ({ user }) => {
 };
 
 export async function getServerSideProps(context) {
-   // const posts = await getRandomPosts(10);
    const user = await getUserByUsername(context.params.username);
-   console.log(user);
+
    return {
       props: { user }, // will be passed to the page component as props
    };

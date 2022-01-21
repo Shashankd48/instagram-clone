@@ -47,3 +47,22 @@ export async function getRandomPosts(postCount, order) {
    });
    return posts;
 }
+
+export async function getPostsByUsername(username, postCount) {
+   const q = query(
+      collection(db, "posts"),
+      where("username", "==", username),
+      limit(postCount),
+      orderBy("timestamp", "desc")
+   );
+   const querySnapshot = await getDocs(q);
+   let posts = [];
+   querySnapshot.forEach((doc) => {
+      posts.push({
+         id: doc.id,
+         ...doc.data(),
+         timestamp: doc.data().timestamp?.toDate().toString(),
+      });
+   });
+   return posts;
+}

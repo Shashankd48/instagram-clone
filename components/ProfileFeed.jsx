@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PostsIcon from "./Icons/PostsIcon";
 import { SmallOutlinedSavedIcon } from "./Icons/SmallOutlinedSavedIcon";
+import UserPosts from "./UserPosts";
 
 const tabs = [
    {
@@ -22,6 +23,15 @@ const getIcon = (icon, active) => {
    }
 };
 
+const getComponent = (tab) => {
+   switch (tab) {
+      case tabs[0].value:
+         return UserPosts();
+      default:
+         return UserPosts();
+   }
+};
+
 const ProfileFeed = () => {
    const [tab, setTab] = useState(tabs[0].value);
 
@@ -40,8 +50,12 @@ const ProfileFeed = () => {
                </li>
             ))}
          </ul>
+
+         <UserPosts />
       </div>
    );
 };
+
+// <div>{getComponent(tab)}</div>
 
 export default ProfileFeed;
