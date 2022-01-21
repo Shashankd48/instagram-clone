@@ -8,7 +8,6 @@ export default function Home() {
       <Fragment>
          <Page title="Instagram" />
          <Feed />
-         <Modal />
       </Fragment>
    );
 }

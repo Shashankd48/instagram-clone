@@ -29,3 +29,21 @@ export async function getPosts(postCount, order) {
    });
    return posts;
 }
+
+export async function getRandomPosts(postCount, order) {
+   const q = query(
+      collection(db, "posts"),
+      limit(postCount),
+      orderBy("timestamp", "desc")
+   );
+   const querySnapshot = await getDocs(q);
+   let posts = [];
+   querySnapshot.forEach((doc) => {
+      posts.push({
+         id: doc.id,
+         ...doc.data(),
+         timestamp: doc.data().timestamp?.toDate().toString(),
+      });
+   });
+   return posts;
+}
