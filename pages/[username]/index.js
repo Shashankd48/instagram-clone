@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { getUserByUsername } from "../../actions/UserAction";
-import Feed from "../../components/Feed";
 import Page from "../../components/Page";
+import ProfileFeed from "../../components/ProfileFeed";
 import ProfileHeader from "../../components/ProfileHeader";
 
 const Profile = ({ user }) => {
@@ -11,6 +11,10 @@ const Profile = ({ user }) => {
             title={`${user.name} (@${user.username}) . Instagram photoes and videos`}
          />
          <ProfileHeader user={user} />
+
+         <hr />
+
+         <ProfileFeed />
       </Fragment>
    );
 };

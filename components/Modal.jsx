@@ -40,6 +40,7 @@ const Modal = () => {
       setLoading(true);
 
       // Create a post and add to firestore 'posts' collection
+      // TODO: Update post count
       const docRef = await addDoc(collection(db, "posts"), {
          username: session.user.username,
          caption: captionRef.current.value,
