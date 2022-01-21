@@ -7,7 +7,7 @@ const Explore = ({ posts }) => {
    return (
       <Fragment>
          <Page title="Instagram | Explore" />
-         <div className="max-w-4xl mx-auto mt-4">
+         <div className="max-w-4xl mx-auto mt-4 overflow-x-hidden">
             <div className="flex flex-wrap -mx-4 overflow-hidden">
                {posts.map((post) => {
                   if (post.image)
