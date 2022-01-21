@@ -35,7 +35,6 @@ const Explore = ({ posts }) => {
 
 export async function getServerSideProps(context) {
    const posts = await getRandomPosts(10);
-   console.log(posts);
    return {
       props: { posts }, // will be passed to the page component as props
    };
