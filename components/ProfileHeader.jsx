@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import Router from "next/router";
 
 const ProfileHeader = ({ user }) => {
    return (
@@ -22,7 +24,10 @@ const ProfileHeader = ({ user }) => {
                   <h1 className=" font-thin text-[1.7rem] tracking-[0.02rem]">
                      {user.username}
                   </h1>
-                  <button className="ml-6 border border-solid px-2 py-1 text-sm font-medium rounded-sm active:opacity-70 text-gray-800">
+                  <button
+                     className="ml-6 border border-solid px-2 py-1 text-sm font-medium rounded-sm active:opacity-70 text-gray-800"
+                     onClick={() => Router.push(`${user.username}/edit`)}
+                  >
                      Edit Profile
                   </button>
                </div>
@@ -41,7 +46,24 @@ const ProfileHeader = ({ user }) => {
                   </li>
                </ul>
 
-               <div>name and other info</div>
+               <div className="mt-4 leading-[1.6rem] text-base">
+                  <h1 className="font-medium tracking-[0.012rem]">
+                     {user.name}
+                  </h1>
+                  <p className="text-gray-500 font-normal">Web Developer</p>
+                  <h2 className=" text-gray-700">Lives in Lucknow.</h2>
+                  <h3 className=" text-gray-700">
+                     Website{" "}
+                     <Link href="https://xparticle.in">
+                        <a
+                           className=" text-blue-900 font-medium"
+                           target="_blank"
+                        >
+                           xparticle.in
+                        </a>
+                     </Link>
+                  </h3>
+               </div>
             </section>
          </div>
       </header>
