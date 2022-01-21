@@ -35,6 +35,9 @@ export default NextAuth({
                email: session.user.email,
                name: session.user.name,
                image: session.user.image,
+               postCount: 0,
+               followerCount: 0,
+               followingCount: 0,
                timestamp: serverTimestamp(),
             });
          }
