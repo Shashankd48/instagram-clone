@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { getUserByUsername } from "../../actions/UserAction";
+import AuthGuard from "../../components/AuthGuard";
 import Page from "../../components/Page";
 import ProfileFeed from "../../components/ProfileFeed";
 import ProfileHeader from "../../components/ProfileHeader";
@@ -7,14 +8,16 @@ import ProfileHeader from "../../components/ProfileHeader";
 const Profile = ({ user }) => {
    return (
       <Fragment>
-         <Page
-            title={`${user.name} (@${user.username}) . Instagram photoes and videos`}
-         />
-         <ProfileHeader user={user} />
+         <AuthGuard>
+            <Page
+               title={`${user.name} (@${user.username}) . Instagram photoes and videos`}
+            />
+            <ProfileHeader user={user} />
 
-         <hr />
+            <hr />
 
-         <ProfileFeed />
+            <ProfileFeed />
+         </AuthGuard>
       </Fragment>
    );
 };

@@ -26,7 +26,7 @@ export default NextAuth({
    callbacks: {
       async session({ session, token, user }) {
          const username = session.user.email.split("@")[0];
-         const foundUser = await getUserByUsername(username);
+         let foundUser = await getUserByUsername(username);
 
          console.log("log: foundUser", foundUser);
 
@@ -42,10 +42,15 @@ export default NextAuth({
                followingCount: 0,
                timestamp: serverTimestamp(),
             });
+            foundUser = await getUserByUsername(username);
          }
 
-         session.user.username = username;
-         session.user.uid = token.sub;
+         session.user = {
+            ...session.user,
+            ...foundUser,
+            username,
+            uid: token.sub,
+         };
 
          return session;
       },

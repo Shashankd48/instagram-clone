@@ -8,13 +8,13 @@ const Loading = ({ height = "200px" }) => {
       >
          <div className="flex">
             <div
-               className={`${circleCommonClasses} mr-1.5 animate-bounce bg-red-500`}
+               className={`${circleCommonClasses} mr-1.5 animate-bounce bg-red-400`}
             ></div>
             <div
-               className={`${circleCommonClasses} mr-1.5 animate-bounce200 bg-red-600`}
+               className={`${circleCommonClasses} mr-1.5 animate-bounce200 bg-red-500`}
             ></div>
             <div
-               className={`${circleCommonClasses} animate-bounce400 bg-red-700`}
+               className={`${circleCommonClasses} animate-bounce400 bg-red-600`}
             ></div>
          </div>
       </div>
