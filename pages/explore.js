@@ -1,9 +1,29 @@
 import Page from "../components/Page";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { getRandomPosts } from "../actions/PostAction";
 import Image from "next/image";
+import LoadMoreButton from "../components/LoadMoreButton";
 
-const Explore = ({ posts }) => {
+const Explore = ({ ssrPosts, previousDoc, lastDoc }) => {
+   const [posts, setPosts] = useState(ssrPosts || []);
+   const [postCount, setPostCount] = useState(10);
+   const [isLoading, setIsLoading] = useState(false);
+   const [docRef, setDocRef] = useState(
+      previousDoc ? JSON.parse(previousDoc) : ""
+   );
+
+   console.log(docRef);
+   console.log(lastDoc);
+
+   const loadMore = async () => {
+      setIsLoading(true);
+      const { posts: newPosts } = await getRandomPosts(5, docRef);
+
+      if (newPosts.length > 0) setPosts([...posts, ...newPosts]);
+      // setPostCount(postCount + 10);
+      setIsLoading(false);
+   };
+
    return (
       <Fragment>
          <Page title="Instagram | Explore" />
@@ -28,15 +48,28 @@ const Explore = ({ posts }) => {
                      );
                })}
             </div>
+
+            <div className="flex justify-center mb-5">
+               <LoadMoreButton
+                  onClick={loadMore}
+                  text={isLoading ? "Loading..." : "Load more"}
+               />
+            </div>
          </div>
       </Fragment>
    );
 };
 
 export async function getServerSideProps(context) {
-   const posts = await getRandomPosts(10);
+   const data = await getRandomPosts(5, 0);
+
+   console.log(data);
+
    return {
-      props: { posts }, // will be passed to the page component as props
+      props: {
+         previousDoc: data.previousDoc ? JSON.stringify(data.previousDoc) : "",
+         ssrPosts: data.posts,
+      },
    };
 }
 
