@@ -16,6 +16,7 @@ const Suggestions = () => {
                id: user.login.uuid,
                avatar: user.picture.medium,
                location: `${user.location.city}, ${user.location.country}`,
+               userType: "fake",
             });
          });
          setSuggestions(tempUsers);
@@ -56,7 +57,7 @@ const Suggestions = () => {
                </div>
 
                <button className="text-xs text-blue-500 font-medium">
-                  Follow
+                  {profile.userType === "fake" ? "Demo User" : "Follow"}
                </button>
             </div>
          ))}
