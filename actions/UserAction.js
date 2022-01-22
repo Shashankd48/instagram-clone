@@ -9,6 +9,7 @@ export async function getUserByUsername(username) {
       user = {
          ...doc.data(),
          timestamp: doc.data().timestamp?.toDate().toString(),
+         id: doc.id,
       };
    });
    return user;

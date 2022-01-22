@@ -11,6 +11,7 @@ import {
    query,
    serverTimestamp,
    setDoc,
+   updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import Comments from "./Comments";
@@ -78,6 +79,8 @@ const Post = ({ id, username, img, userImg, caption, location }) => {
       });
    };
 
+   const addToSaved = async () => {};
+
    return (
       <div className="bg-white my-7 border rounded-sm">
          {/*Header */}
@@ -131,7 +134,7 @@ const Post = ({ id, username, img, userImg, caption, location }) => {
 
                   {/*<PaperAirplaneIcon className="post-btn" /> */}
                </div>
-               <div className="post-btn">
+               <div className="post-btn" onClick={addToSaved}>
                   <BookmarkOutlinedIcon />
                </div>
             </div>

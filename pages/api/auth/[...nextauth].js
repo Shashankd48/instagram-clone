@@ -50,6 +50,7 @@ export default NextAuth({
             ...foundUser,
             username,
             uid: token.sub,
+            id: foundUser.id,
          };
 
          return session;

@@ -57,6 +57,12 @@ const Modal = () => {
             await updateDoc(doc(db, "posts", docRef.id), {
                image: downloadURL,
             });
+
+            await updateDoc(doc(db, "users", session.user.id), {
+               postCount: session.user.postCount + 1,
+            });
+
+            session.user.postCount = session.user.postCount + 1;
          }
       );
 
