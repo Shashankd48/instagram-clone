@@ -2,7 +2,6 @@ const PostsIcon = ({ active = false }) => {
    return (
       <svg
          aria-label=""
-         class="_8-yf5 "
          color={active ? "#262626" : "#8e8e8e"}
          fill={active ? "#262626" : "#8e8e8e"}
          height="12"

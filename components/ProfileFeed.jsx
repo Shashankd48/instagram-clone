@@ -37,7 +37,7 @@ const ProfileFeed = () => {
 
    return (
       <div className="my-3">
-         <ul class="flex justify-around uppercase font-medium tracking-widest text-[13px] text-gray-500 w-[250px] m-auto cursor-pointer">
+         <ul className="flex justify-around uppercase font-medium tracking-widest text-[13px] text-gray-500 w-[250px] m-auto cursor-pointer">
             {tabs.map((item) => (
                <li
                   className={`${

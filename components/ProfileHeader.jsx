@@ -5,8 +5,8 @@ import Router from "next/router";
 const ProfileHeader = ({ user }) => {
    return (
       <header>
-         <div class="flex flex-wrap overflow-hidden mt-4 p-3">
-            <div class="my-1 px-1 w-full overflow-hidden sm:my-2 sm:px-2 sm:w-1/3">
+         <div className="flex flex-wrap overflow-hidden mt-4 p-3">
+            <div className="my-1 px-1 w-full overflow-hidden sm:my-2 sm:px-2 sm:w-1/3">
                <div className="flex sm:justify-center items-center">
                   <div className="h-[100px] w-[100px] sm:h-[150px] sm:w-[150px] relative">
                      <Image
@@ -19,7 +19,7 @@ const ProfileHeader = ({ user }) => {
                </div>
             </div>
 
-            <section class="my-1 px-1 w-full overflow-hidden sm:my-2 sm:px-2 sm:w-2/3">
+            <section className="my-1 px-1 w-full overflow-hidden sm:my-2 sm:px-2 sm:w-2/3">
                <div className="flex py-2 items-center">
                   <h1 className=" font-thin text-[1.7rem] tracking-[0.02rem]">
                      {user.username}

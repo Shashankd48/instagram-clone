@@ -3,7 +3,6 @@ const ProfileIcon = () => {
       <div>
          <svg
             aria-label="Profile"
-            class="_8-yf5 "
             color="#262626"
             fill="#262626"
             height="16"

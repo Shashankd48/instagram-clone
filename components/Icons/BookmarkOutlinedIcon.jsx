@@ -2,7 +2,6 @@ const BookmarkOutlinedIcon = ({ width = 24, height = 24 }) => {
    return (
       <svg
          aria-label="Save"
-         class="_8-yf5 "
          color="#262626"
          fill="#262626"
          height={height}
