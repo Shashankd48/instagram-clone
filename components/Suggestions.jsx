@@ -1,22 +1,21 @@
-import { useEffect, useState } from "react";
-import { getRandomUsers } from "../actions/UtilesAction";
-import Image from "next/image";
+import { Fragment, useEffect, useState } from "react";
 import { getUsers } from "../actions/UserAction";
 import Suggestion from "./Suggestion";
 import { db } from "../firebase";
+import Loading from "./Loading";
 
 const Suggestions = () => {
    const [suggestions, setSuggestions] = useState([]);
+   const [isLoading, setIsLoading] = useState(false);
 
    const _getUsers = async () => {
+      setIsLoading(true);
       const users = await getUsers(5);
 
       if (users && users.length > 0) {
-         let tempUsers = [];
-         users.forEach((user) => tempUsers.push(user));
-
-         setSuggestions([...tempUsers, ...suggestions]);
+         setSuggestions(users);
       }
+      setIsLoading(false);
    };
 
    useEffect(() => {
@@ -30,9 +29,15 @@ const Suggestions = () => {
             <button className="font-semibold text-gray-600">See All</button>
          </div>
 
-         {suggestions.map((profile) => (
-            <Suggestion profile={profile} />
-         ))}
+         {isLoading ? (
+            <Loading />
+         ) : (
+            <Fragment>
+               {suggestions.map((profile) => (
+                  <Suggestion profile={profile} />
+               ))}
+            </Fragment>
+         )}
       </div>
    );
 };
