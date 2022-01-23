@@ -10,6 +10,7 @@ const Explore = () => {
    const [posts, setPosts] = useState([]);
    const [isLoading, setIsLoading] = useState(false);
    const [docRef, setDocRef] = useState("");
+   const [isDisabled, setIsDisabled] = useState(false);
 
    useEffect(() => {
       fetchPosts();
@@ -30,6 +31,7 @@ const Explore = () => {
       if (data) {
          setPosts([...posts, ...data.posts]);
          setDocRef(data.lastVisible);
+         if (data.posts.length < 6) setIsDisabled(true);
       }
    };
 
@@ -62,7 +64,11 @@ const Explore = () => {
                {isLoading ? (
                   <Loading />
                ) : (
-                  <LoadMoreButton onClick={loadMore} text="Load more" />
+                  <Fragment>
+                     {!isDisabled && (
+                        <LoadMoreButton onClick={loadMore} text="Load more" />
+                     )}
+                  </Fragment>
                )}
             </div>
          </div>
