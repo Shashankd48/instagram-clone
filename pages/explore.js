@@ -1,27 +1,101 @@
 import Page from "../components/Page";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { getRandomPosts } from "../actions/PostAction";
 import Image from "next/image";
 import LoadMoreButton from "../components/LoadMoreButton";
+import {
+   collection,
+   query,
+   orderBy,
+   startAfter,
+   limit,
+   getDocs,
+   setDoc,
+} from "firebase/firestore";
+import { db } from "../firebase";
 
-const Explore = ({ ssrPosts, previousDoc, lastDoc }) => {
-   const [posts, setPosts] = useState(ssrPosts || []);
+const Explore = ({ ssrPosts, previousDoc }) => {
+   const [posts, setPosts] = useState([]);
    const [postCount, setPostCount] = useState(10);
    const [isLoading, setIsLoading] = useState(false);
-   const [docRef, setDocRef] = useState(
-      previousDoc ? JSON.parse(previousDoc) : ""
-   );
+   // const [docRef, setDocRef] = useState(
+   //    previousDoc ? JSON.parse(previousDoc) : ""
+   // );
+   const [docRef, setDocRef] = useState("");
 
-   console.log(docRef);
-   console.log(lastDoc);
+   console.log("log: docRef", docRef);
+
+   useEffect(() => {
+      fetchPosts();
+   }, [db]);
+
+   const fetchPosts = async () => {
+      // NOTE: Test
+      // Query the first page of docs
+      const first = query(
+         collection(db, "posts"),
+         orderBy("timestamp", "desc"),
+         limit(5)
+      );
+      const documentSnapshots = await getDocs(first);
+
+      // Get the last visible document
+      const lastVisible =
+         documentSnapshots.docs[documentSnapshots.docs.length - 1];
+      console.log("log: last", lastVisible);
+      setDocRef(lastVisible);
+
+      let tempPosts = [];
+
+      documentSnapshots.forEach((doc) => {
+         tempPosts.push({
+            id: doc.id,
+            ...doc.data(),
+            timestamp: doc.data().timestamp?.toDate().toString(),
+         });
+      });
+
+      setPosts(tempPosts);
+   };
 
    const loadMore = async () => {
-      setIsLoading(true);
-      const { posts: newPosts } = await getRandomPosts(5, docRef);
+      // setIsLoading(true);
+      // const { posts: newPosts } = await getRandomPosts(5, docRef);
 
-      if (newPosts.length > 0) setPosts([...posts, ...newPosts]);
-      // setPostCount(postCount + 10);
-      setIsLoading(false);
+      // if (newPosts.length > 0) setPosts([...posts, ...newPosts]);
+      // // setPostCount(postCount + 10);
+      // setIsLoading(false);
+
+      console.log("log: tempPosts", tempPosts);
+      // setPosts([...posts, ...tempPosts]);
+
+      // Construct a new query starting at this document,
+      // get the next 25 cities.
+      const next = query(
+         collection(db, "posts"),
+         orderBy("timestamp", "desc"),
+         startAfter(docRef),
+         limit(5)
+      );
+
+      const documentSnapshots = await getDocs(next);
+
+      const lastVisible =
+         documentSnapshots.docs[documentSnapshots.docs.length - 1];
+
+      setDocRef(lastVisible);
+
+      let tempPosts = [];
+      documentSnapshots.forEach((doc) => {
+         tempPosts.push({
+            id: doc.id,
+            ...doc.data(),
+            timestamp: doc.data().timestamp?.toDate().toString(),
+         });
+      });
+
+      console.log("log: new tempPosts", tempPosts);
+      setPosts([...posts, ...tempPosts]);
    };
 
    return (
@@ -61,9 +135,7 @@ const Explore = ({ ssrPosts, previousDoc, lastDoc }) => {
 };
 
 export async function getServerSideProps(context) {
-   const data = await getRandomPosts(5, 0);
-
-   console.log(data);
+   const data = await getRandomPosts(5, "");
 
    return {
       props: {

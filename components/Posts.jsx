@@ -30,6 +30,7 @@ const Posts = () => {
                });
             });
 
+            console.log("log: temp", temp.length);
             setPosts(temp);
             setIsLoading(false);
          }

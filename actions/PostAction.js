@@ -35,7 +35,7 @@ export async function getRandomPosts(postCount, previousDoc) {
    const q = query(
       collection(db, "posts"),
       orderBy("timestamp", "desc"),
-      startAfter(previousDoc),
+      startAt(previousDoc),
       limit(postCount)
    );
    const querySnapshot = await getDocs(q);
