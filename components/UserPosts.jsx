@@ -4,14 +4,14 @@ import { getPostsByUsername } from "../actions/PostAction";
 import Image from "next/image";
 import Loading from "./Loading";
 
-const UserPosts = () => {
+const UserPosts = ({ username }) => {
    const { data: session } = useSession();
    const [posts, setPosts] = useState([]);
    const [isLoading, setIsLoading] = useState(false);
 
    const getPosts = async () => {
       setIsLoading(true);
-      const data = await getPostsByUsername(session.user.username, 20);
+      const data = await getPostsByUsername(username, 20);
       setPosts(data);
       setIsLoading(false);
    };
@@ -19,7 +19,7 @@ const UserPosts = () => {
    useEffect(() => {
       console.log("log: session", session);
       if (session) getPosts();
-   }, [session]);
+   }, [username]);
 
    const PostSections = () => {
       return (

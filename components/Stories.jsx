@@ -1,11 +1,13 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { getUsers } from "../actions/UserAction";
 import { getRandomUsers } from "../actions/UtilesAction";
 import Story from "./Story";
 
 const Stories = () => {
    const [suggestions, setSuggestions] = useState([]);
    const { data: session } = useSession();
+   const [isLoading, setIsLoading] = useState(false);
 
    const generateFakeUsers = async () => {
       const users = await getRandomUsers(20);

@@ -32,7 +32,7 @@ const getComponent = (tab) => {
    }
 };
 
-const ProfileFeed = () => {
+const ProfileFeed = ({ username }) => {
    const [tab, setTab] = useState(tabs[0].value);
 
    return (
@@ -52,7 +52,7 @@ const ProfileFeed = () => {
             ))}
          </ul>
 
-         <UserPosts />
+         <UserPosts username={username} />
       </div>
    );
 };

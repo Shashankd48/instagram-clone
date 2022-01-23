@@ -1,31 +1,27 @@
 import { useEffect, useState } from "react";
 import { getRandomUsers } from "../actions/UtilesAction";
 import Image from "next/image";
+import { getUsers } from "../actions/UserAction";
+import Suggestion from "./Suggestion";
+import { db } from "../firebase";
 
 const Suggestions = () => {
    const [suggestions, setSuggestions] = useState([]);
 
-   const generateFakeUsers = async () => {
-      const users = await getRandomUsers(5);
+   const _getUsers = async () => {
+      const users = await getUsers(5);
 
-      if (users && users?.results?.length > 0) {
-         const tempUsers = [];
-         users.results.forEach((user) => {
-            tempUsers.push({
-               username: user.login.username,
-               id: user.login.uuid,
-               avatar: user.picture.medium,
-               location: `${user.location.city}, ${user.location.country}`,
-               userType: "fake",
-            });
-         });
-         setSuggestions(tempUsers);
+      if (users && users.length > 0) {
+         let tempUsers = [];
+         users.forEach((user) => tempUsers.push(user));
+
+         setSuggestions([...tempUsers, ...suggestions]);
       }
    };
 
    useEffect(() => {
-      generateFakeUsers();
-   }, []);
+      _getUsers();
+   }, [db]);
 
    return (
       <div className="mt-4">
@@ -35,31 +31,7 @@ const Suggestions = () => {
          </div>
 
          {suggestions.map((profile) => (
-            <div
-               key={profile.id}
-               className="flex items-center justify-between mt-3"
-            >
-               <div className="p-[2px] rounded-full border">
-                  <div className="w-8 h-8 relative ">
-                     <Image
-                        src={profile.avatar}
-                        alt="user profile"
-                        className="rounded-full"
-                        layout="fill"
-                        objectFit="contain"
-                     />
-                  </div>
-               </div>
-
-               <div className="flex-1 ml-4">
-                  <h2 className="font-semibold text-sm">{profile.username}</h2>
-                  <h3 className="text-xs">Lives in {profile.location}</h3>
-               </div>
-
-               <button className="text-xs text-blue-500 font-medium">
-                  {profile.userType === "fake" ? "Demo User" : "Follow"}
-               </button>
-            </div>
+            <Suggestion profile={profile} />
          ))}
       </div>
    );

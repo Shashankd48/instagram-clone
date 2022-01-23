@@ -22,7 +22,7 @@ const Profile = ({ user }) => {
 
                   <hr />
 
-                  <ProfileFeed />
+                  <ProfileFeed username={username} />
                </Fragment>
             ) : (
                <Fragment>
