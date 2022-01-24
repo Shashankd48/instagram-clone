@@ -1,12 +1,43 @@
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { getUserByUsername } from "../../actions/UserAction";
 
+const classes = {
+   row: "flex flex-wrap items-center mb-5",
+   column1: "w-[30%] flex justify-end pr-7",
+   column2: "flex-auto",
+   input: "py-1 px-2 w-[300px] border-1 border-gray-300 rounded-sm ",
+   label: "text-md font-medium tracking-wide text-gray-800",
+   button:
+      "px-3 py-1.5 rounded-md active:opacity-80 border bg-blue-500 text-white font-medium tracking-wide text-sm",
+};
+
 const EditProfile = ({ user }) => {
+   const [isDisabled, setIsDisabled] = useState(true);
+   const [userInfo, setUserInfo] = useState({ ...user });
+   const [isValueChanges, setIsValueChanges] = useState(false);
+
+   const handleFormSubmit = (event) => {
+      event.preventDefault();
+
+      console.log("log: userInfo", userInfo);
+   };
+
+   useEffect(() => {
+      if (JSON.stringify(userInfo) !== JSON.stringify(user))
+         setIsDisabled(false);
+   }, [userInfo]);
+
+   const handleChange = (event) => {
+      setIsValueChanges(true);
+      setUserInfo({ ...user, [event.target.name]: event.target.value });
+   };
+
    return (
       <main className="mt-5 border py-3 px-5">
-         <article className="w-1/2 m-auto">
-            <div className="flex flex-wrap items-center mt-5">
-               <div className="w-[100px] overflow-hidden  pl-5">
+         <article className="w-[100%] sm:w-[75%] m-auto   my-5">
+            <div className={classes.row}>
+               <div className={classes.column1}>
                   <div className="w-10 h-10 relative">
                      <Image
                         src={user.image}
@@ -18,7 +49,7 @@ const EditProfile = ({ user }) => {
                   </div>
                </div>
 
-               <div className="w-auto -ml-2">
+               <div className={classes.column2}>
                   <h1 className="text-lg">{user.username}</h1>
                   <p className="text-sm font-medium tracking-wide text-blue-500 -mt-1">
                      Change profile photo
@@ -26,42 +57,131 @@ const EditProfile = ({ user }) => {
                </div>
             </div>
 
-            <form className="mt-5">
-               <div className="flex flex-wrap items-center mt-5">
-                  <aside className="w-[100px] overflow-hidden text-right">
-                     <label
-                        htmlFor="name"
-                        className="text-md font-medium tracking-wide text-gray-800"
-                     >
+            <form className="mt-5" onSubmit={handleFormSubmit}>
+               <div className={classes.row}>
+                  <aside className={classes.column1}>
+                     <label htmlFor="name" className={classes.label}>
                         Name
                      </label>
                   </aside>
-                  <div className="-ml-2 overflow-hidden">
+                  <div className={classes.column2}>
                      <input
                         type="text"
                         label="name"
                         value={user.name}
-                        className="py-1 px-2 w-[300px] border-1 border-gray-300 rounded-sm active:border-gray-900"
+                        className={classes.input}
+                        name="name"
+                        onChange={handleChange}
                      />
                   </div>
                </div>
 
-               <div className="flex flex-wrap items-center mt-5">
-                  <aside className="w-[100px] overflow-hidden  border">
-                     <label
-                        htmlFor="name"
-                        className="text-md font-medium tracking-wide text-gray-800"
-                     >
+               <div className={classes.row}>
+                  <aside className={classes.column1}>
+                     <label htmlFor="username" className={classes.label}>
                         Username
                      </label>
                   </aside>
-                  <div className="-ml-2 overflow-hidden">
+                  <div className={classes.column2}>
                      <input
                         type="text"
-                        label="name"
+                        label="username"
                         value={user.username}
-                        className="py-1 px-2 w-[300px] border-1 border-gray-300 rounded-sm active:border-gray-900"
+                        className={classes.input}
+                        name="username"
+                        disabled
                      />
+                     <br />
+                     <small className="text-gray-500">
+                        Username can't be changed.
+                     </small>
+                  </div>
+               </div>
+
+               <div className={classes.row}>
+                  <aside className={classes.column1}>
+                     <label htmlFor="website" className={classes.label}>
+                        Website
+                     </label>
+                  </aside>
+                  <div className={classes.column2}>
+                     <input
+                        type="text"
+                        label="website"
+                        value={user.website}
+                        className={classes.input}
+                        name="website"
+                        onChange={handleChange}
+                     />
+                  </div>
+               </div>
+
+               <div className={classes.row}>
+                  <aside className={classes.column1}>
+                     <label htmlFor="bio" className={classes.label}>
+                        Bio
+                     </label>
+                  </aside>
+                  <div className={classes.column2}>
+                     <textarea
+                        type="text"
+                        label="bio"
+                        value={user.bio}
+                        className={classes.input}
+                        name="bio"
+                        onChange={handleChange}
+                     />
+                  </div>
+               </div>
+
+               <div className={classes.row}>
+                  <aside className={classes.column1}>
+                     <label htmlFor="email" className={classes.label}>
+                        Email
+                     </label>
+                  </aside>
+                  <div className={classes.column2}>
+                     <input
+                        type="email"
+                        label="email"
+                        value={user.email}
+                        className={classes.input}
+                        name="email"
+                        onChange={handleChange}
+                     />
+                  </div>
+               </div>
+
+               <div className={classes.row}>
+                  <aside className={classes.column1}>
+                     <label htmlFor="phone" className={classes.label}>
+                        Phone number
+                     </label>
+                  </aside>
+                  <div className={classes.column2}>
+                     <input
+                        type="text"
+                        label="phone"
+                        value={user.phone}
+                        className={classes.input}
+                        name="phone"
+                        onChange={handleChange}
+                     />
+                  </div>
+               </div>
+
+               <div className={classes.row}>
+                  <aside className={classes.column1}></aside>
+                  <div className={`${classes.column2} justify-end`}>
+                     <button
+                        type="submit"
+                        className={`${classes.button} ${
+                           isDisabled ? "opacity-70" : ""
+                        } `}
+                        disabled={isDisabled}
+                     >
+                        Submit
+                     </button>
                   </div>
                </div>
             </form>
