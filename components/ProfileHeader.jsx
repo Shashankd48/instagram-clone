@@ -51,18 +51,22 @@ const ProfileHeader = ({ user }) => {
                      {user.name}
                   </h1>
                   <p className="text-gray-500 font-normal">{user.bio}</p>
-                  <h2 className=" text-gray-700">Lives in {user.address}</h2>
-                  <h3 className=" text-gray-700">
-                     Website{" "}
-                     <Link href={user.website}>
-                        <a
-                           className=" text-blue-900 font-medium"
-                           target="_blank"
-                        >
-                           {user.website}
-                        </a>
-                     </Link>
-                  </h3>
+                  <h2 className=" text-gray-700">
+                     Lives in {user.address ? user.address : "instagram"}
+                  </h2>
+                  {user.website && (
+                     <h3 className=" text-gray-700">
+                        Website{" "}
+                        <Link href={user.website}>
+                           <a
+                              className=" text-blue-900 font-medium"
+                              target="_blank"
+                           >
+                              {user.website}
+                           </a>
+                        </Link>
+                     </h3>
+                  )}
                </div>
             </section>
          </div>
