@@ -5,6 +5,7 @@ import Layouts from "../layouts";
 import NProgress from "nprogress";
 import Router from "next/router";
 import "nprogress/nprogress.css";
+import "react-toastify/dist/ReactToastify.css";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
    Router.events.on("routeChangeStart", () => NProgress.start());

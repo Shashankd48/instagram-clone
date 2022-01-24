@@ -15,7 +15,7 @@ export async function getUserByUsername(username) {
    querySnapshot.forEach((doc) => {
       user = {
          ...doc.data(),
-         timestamp: doc.data().timestamp?.toDate().toString(),
+         timestamp: doc.data()?.timestamp?.toDate().toString(),
          id: doc.id,
       };
    });
