@@ -50,16 +50,16 @@ const ProfileHeader = ({ user }) => {
                   <h1 className="font-medium tracking-[0.012rem]">
                      {user.name}
                   </h1>
-                  <p className="text-gray-500 font-normal">Web Developer</p>
-                  <h2 className=" text-gray-700">Lives in Lucknow.</h2>
+                  <p className="text-gray-500 font-normal">{user.bio}</p>
+                  <h2 className=" text-gray-700">Lives in {user.address}</h2>
                   <h3 className=" text-gray-700">
                      Website{" "}
-                     <Link href="https://xparticle.in">
+                     <Link href={user.website}>
                         <a
                            className=" text-blue-900 font-medium"
                            target="_blank"
                         >
-                           xparticle.in
+                           {user.website}
                         </a>
                      </Link>
                   </h3>

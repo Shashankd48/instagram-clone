@@ -31,11 +31,14 @@ const EditProfile = ({ user }) => {
       let profile = { ...userInfo };
       delete profile.id;
       try {
-         const data = await updateDoc(doc(db, "users", session.user.id), {
+         await updateDoc(doc(db, "users", session.user.id), {
             ...profile,
             timestamp: Timestamp.fromDate(new Date(userInfo.timestamp)),
          });
-         toast.success("Profile updated!");
+         const newData = await getUserByUsername(session.user.username);
+         session.user = { uid: session.user.uid, ...newData };
+         setUserInfo({ ...newData });
+         toast.success("Profile update!");
       } catch (error) {
          toast.error("Failed to update profile");
       }
@@ -181,11 +184,29 @@ const EditProfile = ({ user }) => {
                      </aside>
                      <div className={classes.column2}>
                         <input
-                           type="text"
+                           type="tel"
                            label="phone"
                            value={userInfo.phone}
                            className={classes.input}
                            name="phone"
+                           onChange={handleChange}
+                        />
+                     </div>
+                  </div>
+
+                  <div className={classes.row}>
+                     <aside className={classes.column1}>
+                        <label htmlFor="address" className={classes.label}>
+                           Lives in
+                        </label>
+                     </aside>
+                     <div className={classes.column2}>
+                        <textarea
+                           type="text"
+                           label="address"
+                           value={userInfo.address}
+                           className={classes.input}
+                           name="address"
                            onChange={handleChange}
                         />
                      </div>
