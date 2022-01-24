@@ -3,7 +3,7 @@ import { Fragment, useEffect, useState } from "react";
 import { getUserByUsername } from "../../actions/UserAction";
 import Page from "../../components/Page";
 import { db } from "../../firebase";
-import { updateDoc, doc, serverTimestamp, Timestamp } from "firebase/firestore";
+import { updateDoc, doc, Timestamp } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 
@@ -30,6 +30,7 @@ const EditProfile = ({ user }) => {
 
       let profile = { ...userInfo };
       delete profile.id;
+      delete profile.username;
       try {
          await updateDoc(doc(db, "users", session.user.id), {
             ...profile,
@@ -49,6 +50,7 @@ const EditProfile = ({ user }) => {
    useEffect(() => {
       if (JSON.stringify(userInfo) !== JSON.stringify(user))
          setIsDisabled(false);
+      else setIsDisabled(true);
    }, [userInfo]);
 
    const handleChange = (event) => {
